@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 import os
+import setuptools  # necessary even when numpy.distutils.core.setup is used
 
 # Include extensions only when not on readthedocs.org
 if os.environ.get('READTHEDOCS', None) == 'True':
@@ -9,14 +10,6 @@ if os.environ.get('READTHEDOCS', None) == 'True':
     extensions = []
 else:
     from numpy.distutils.core import setup, Extension
-
-    # add MinGW to Windows only, if needed
-    if os.name == 'nt':
-        sfn = os.path.join(os.path.dirname(__file__), 'setup.cfg')
-        stxt = open(sfn).read()
-        if '[build_ext]' not in stxt:
-            with open(sfn, 'a') as f:
-                f.write("\n[build_ext]\ncompiler = mingw32")
 
     extensions = [
         Extension(name='apexpy.fortranapex',
