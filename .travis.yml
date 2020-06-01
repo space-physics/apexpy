@@ -1,14 +1,11 @@
 language: python
 group: travis_latest
-dist: xenial
 
 git:
   depth: 25
   quiet: true
 
 python:
-  - 2.7
-  - 3.4
   - 3.5
   - 3.6
   - 3.7
@@ -29,11 +26,10 @@ before_install:
   - python --version
   - uname -a
   - lsb_release -a
-  - pip install numpy
 
 install:
   - pip install coveralls pytest-cov coverage codecov
-  - python setup.py clean --all build_ext --force --inplace
+  # - python setup.py clean --all build_ext --force --inplace
   - python setup.py develop
   - pip install tox-travis
 
